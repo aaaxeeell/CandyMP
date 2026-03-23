@@ -1,0 +1,40 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\UAB\\MP\\DrCandy\\drcandy\\visual_studio\\0. Windows Desktop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{95EBFF15-EE8A-4B39-B29E-6E414EFC541A}|P2_Lab.vcxproj|D:\\UAB\\MP\\DrCandy\\drcandy\\src\\board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "board.cpp",
+              "DocumentMoniker": "D:\\UAB\\MP\\DrCandy\\drcandy\\src\\board.cpp",
+              "RelativeDocumentMoniker": "..\\..\\src\\board.cpp",
+              "ToolTip": "D:\\UAB\\MP\\DrCandy\\drcandy\\src\\board.cpp",
+              "RelativeToolTip": "..\\..\\src\\board.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-19T18:37:31.663Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
