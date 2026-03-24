@@ -36,7 +36,6 @@ Candy* Board::getCell(int x, int y) const
     {
         c = m_tauler[x][y];
     }
-    
     return c;
 }
 
