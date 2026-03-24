@@ -31,11 +31,13 @@ Board::~Board()
 
 Candy* Board::getCell(int x, int y) const
 {
+    Candy* c = nullptr;
     if (x >= 0 && x < m_width && y >= 0 && y < m_height)
     {
-        return m_tauler[x][y];
+        c = m_tauler[x][y];
     }
-    return nullptr;
+    
+    return c;
 }
 
 void Board::setCell(Candy* candy, int x, int y)
