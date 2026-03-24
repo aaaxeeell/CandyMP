@@ -1,2 +1,22 @@
-/// Run unit tests
 bool test();
+bool test1_getCell_tablero_vacio();
+bool test2_getCell_fuera_de_rango();
+bool test3_setCell_getCell();
+bool test4_getWidth_getHeight();
+bool test5_comptarEnDireccio_horizontal();
+bool test6_comptarEnDireccio_para_ante_color_diferente();
+bool test7_shouldExplode_horizontal();
+bool test8_shouldExplode_solo_dos_no_explota();
+bool test9_shouldExplode_vertical();
+bool test10_shouldExplode_diagonal_principal();
+bool test11_shouldExplode_diagonal_secundaria();
+bool test12_shouldExplode_aislado_no_explota();
+bool test13_shouldExplode_colores_alternados();
+bool test14_explodeAndDrop_tablero_vacio();
+bool test15_explodeAndDrop_tres_horizontal();
+bool test16_explodeAndDrop_no_relacionado_permanece();
+bool test17_explodeAndDrop_drop();
+bool test18_explodeAndDrop_reaccion_en_cadena();
+bool test19_dump_rutas();
+bool test20_load_restaura_caramelos();
+bool test21_dump_load_ida_y_vuelta();
