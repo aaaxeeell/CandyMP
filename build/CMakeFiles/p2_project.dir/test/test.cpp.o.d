@@ -1060,4 +1060,5 @@ CMakeFiles/p2_project.dir/test/test.cpp.o: \
   /opt/homebrew/include/SDL2/SDL_ttf.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
-  /Users/aaaxeeellt/UAB/Programacio\ 2/CandyMP/drcandy/src/util.h
+  /Users/aaaxeeellt/UAB/Programacio\ 2/CandyMP/drcandy/src/util.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream
