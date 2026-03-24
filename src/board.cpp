@@ -73,7 +73,9 @@ bool Board::shouldExplode(int x, int y) const
     // x i y son les coordenades de la peça.
     // dx i dy els vectors de direcció.
     Candy* caramelCentral = getCell(x, y);
-
+    // seguretat
+    if (caramelCentral == nullptr) 
+        return false;
     CandyType tipusCaramelCentral = caramelCentral->getType();
     bool boom = false;
 
