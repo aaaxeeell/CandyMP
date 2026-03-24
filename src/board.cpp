@@ -32,7 +32,9 @@ Board::~Board()
 Candy* Board::getCell(int x, int y) const
 {
     if (x >= 0 && x < m_width && y >= 0 && y < m_height)
+    {
         return m_tauler[x][y];
+    }
     return nullptr;
 }
 
@@ -73,40 +75,46 @@ bool Board::shouldExplode(int x, int y) const
     // x i y son les coordenades de la peça.
     // dx i dy els vectors de direcció.
     Candy* caramelCentral = getCell(x, y);
-    // seguretat
-    if (caramelCentral == nullptr) 
-        return false;
-    CandyType tipusCaramelCentral = caramelCentral->getType();
+    
     bool boom = false;
 
-    // HORITZONTAL: dx = 1  i dx = -1, dy = 0
-    if ((comptarEnDireccio(x, y, 1, 0, tipusCaramelCentral) +
-         comptarEnDireccio(x, y, -1, 0, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
+    // seguretat
+    if (caramelCentral == nullptr) 
     {
-        boom = true;
+        boom = false;
     }
-
-    // VERTICAL: dy = 1 i dy = -1 , dx = 0
-    if (!boom && (comptarEnDireccio(x, y, 0, 1, tipusCaramelCentral) +
-                  comptarEnDireccio(x, y, 0, -1, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
+    else
     {
-        boom = true;
-    }
+        CandyType tipusCaramelCentral = caramelCentral->getType();
 
-    // DIAGONAL PRINCIPAL: dx = 1, dy = 1 i dx = -1, dy = -1
-    if (!boom && (comptarEnDireccio(x, y, 1, 1, tipusCaramelCentral) +
-                  comptarEnDireccio(x, y, -1, -1, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
-    {
-        boom = true;
-    }
+        // HORITZONTAL: dx = 1  i dx = -1, dy = 0
+        if ((comptarEnDireccio(x, y, 1, 0, tipusCaramelCentral) +
+            comptarEnDireccio(x, y, -1, 0, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
+        {
+            boom = true;
+        }
 
-    // DIAGONAL SECUNDÀRIA: dx = -1, dy = 1 i dx = 1, dy = -1
-    if (!boom && (comptarEnDireccio(x, y, -1, 1, tipusCaramelCentral) +
-                  comptarEnDireccio(x, y, 1, -1, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
-    {
-        boom = true;
-    }
+        // VERTICAL: dy = 1 i dy = -1 , dx = 0
+        if (!boom && (comptarEnDireccio(x, y, 0, 1, tipusCaramelCentral) +
+                    comptarEnDireccio(x, y, 0, -1, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
+        {
+            boom = true;
+        }
 
+        // DIAGONAL PRINCIPAL: dx = 1, dy = 1 i dx = -1, dy = -1
+        if (!boom && (comptarEnDireccio(x, y, 1, 1, tipusCaramelCentral) +
+                    comptarEnDireccio(x, y, -1, -1, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
+        {
+            boom = true;
+        }
+
+        // DIAGONAL SECUNDÀRIA: dx = -1, dy = 1 i dx = 1, dy = -1
+        if (!boom && (comptarEnDireccio(x, y, -1, 1, tipusCaramelCentral) +
+                    comptarEnDireccio(x, y, 1, -1, tipusCaramelCentral) + 1) >= SHORTEST_EXPLOSION_LINE)
+        {
+            boom = true;
+        }
+    }
     return boom;
 }
 
