@@ -130,29 +130,6 @@ bool test()
         }
     }
 
-    {
-        Board b(5, 5);
-        Candy* r0 = new Candy(CandyType::TYPE_RED);
-        Candy* r1 = new Candy(CandyType::TYPE_RED);
-        Candy* r2 = new Candy(CandyType::TYPE_RED);
-
-        b.setCell(r0, 0, 0); 
-        b.setCell(r1, 1, 0); 
-        b.setCell(r2, 2, 0);
-
-        if (!b.shouldExplode(1, 0)) 
-        { 
-            std::cout << "shouldExplode no detecta linia horitzontal de 3." << std::endl;
-            delete r0; 
-            delete r1; 
-            delete r2; 
-            return false; 
-        }
-        delete r0; 
-        delete r1; 
-        delete r2;
-    }
-
     // --- 4. TEST DE PERSISTENCIA (DUMP/LOAD) ---
     {
         Board b(5, 5);
@@ -167,20 +144,16 @@ bool test()
             {
                 if (b2.getCell(1, 1) == nullptr || b2.getCell(1, 1)->getType() != CandyType::TYPE_GREEN) 
                 {
-                    std::cout << "[Fallo] Los datos cargados no coinciden" << std::endl;
+                    std::cout << "ERROR: Los datos cargados no coinciden" << std::endl;
                     return false;
                 }
             } 
             else 
             {
-                std::cout << "[Fallo] No se pudo cargar el archivo generado" << std::endl;
+                std::cout << "ERROR: No se pudo cargar el archivo generado" << std::endl;
                 return false;
             }
         } 
-        else 
-        {
-            std::cout << "[Aviso] Fallo al escribir archivo (revisa permisos), saltando..." << std::endl;
-        }
     }
 
     { //Test 5- ShouldExplode
@@ -195,7 +168,7 @@ bool test()
 
         if (!b.shouldExplode(1, 0))  //comproben si el centre explota
         { 
-            std::cout << "[FALLO] shouldExplode no detecta línea horizontal de 3" << std::endl;
+            std::cout << "ERROR: shouldExplode no detecta línea horizontal de 3" << std::endl;
             delete r0; 
             delete r1; 
             delete r2; 
@@ -218,7 +191,7 @@ bool test()
 
         if (!b.shouldExplode(1, 1)) 
         { 
-            std::cout << "[FALLO] shouldExplode no detecta línea diagonal" << std::endl;
+            std::cout << "ERROR: shouldExplode no detecta línea diagonal" << std::endl;
             delete y0;
             delete y1;
             delete y2;
@@ -243,7 +216,7 @@ bool test()
 
         if (exploded.size() != 3) 
         { 
-            std::cout << "[FALLO] explodeAndDrop no devuelve 3 caramelos" << std::endl;
+            std::cout << "ERROR: explodeAndDrop no devuelve 3 caramelos" << std::endl;
             
             //Borramos los caramelos, pero no se hace con delete porque no estan en el tablero
             //Estan en exploded, por eso lo hacemos asi, tmb se hace con for(auto c : exploded)
@@ -262,5 +235,45 @@ bool test()
 
 
     }
+
+    std::cout << "--- Iniciando Tests Unitarios ---\n";
+    
+    // Prueba 1: Constructor de Board y validación de dimensiones
+    Board b(10, 12);
+    if (b.getWidth() == 10 && b.getHeight() == 12) 
+    {
+        std::cout << "[ OK ] Dimensiones inicializadas correctamente.\n";
+    } 
+    else 
+    {
+        std::cout << "[FAIL] Error en dimensiones del tablero.\n";
+    }
+
+    // Prueba 2: Uso seguro de memoria dinámica con setCell y getCell
+    Candy* carameloTest = new Candy(CandyType::TYPE_RED);
+    b.setCell(carameloTest, 5, 5);
+    
+    Candy* recuperado = b.getCell(5, 5);
+    if (recuperado == carameloTest && recuperado->getType() == CandyType::TYPE_RED) 
+    {
+        std::cout << "[ OK ] Inserción y lectura de memoria (setCell/getCell).\n";
+    } 
+    else 
+    {
+        std::cout << "[FAIL] Error en lectura/escritura de celdas.\n";
+    }
+    
+    // Prueba 3: Lectura fuera de límites (caso inválido)
+    if (b.getCell(-1, 50) == nullptr)
+    {
+        std::cout << "[ OK ] Protección contra acceso fuera de límites.\n";
+    }
+    else
+    {
+        std::cout << "[FAIL] El tablero no protege la memoria de índices inválidos.\n";
+    }
+
+    std::cout << "--- Fin de Tests Unitarios ---\n\n";
+
     return true;
 }

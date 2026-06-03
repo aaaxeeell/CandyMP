@@ -91,11 +91,11 @@ public:
 
 
 private:
-private:
     int m_width; 
     int m_height; 
-    std::vector<std::vector<Candy*>> m_tauler; 
-    Candy* m_storage[DEFAULT_BOARD_WIDTH][DEFAULT_BOARD_HEIGHT];
+    // Actualitzem a MEMÒRIA DINÀMICA: S'emmagatzema tot en una array dinàmic de punters.
+    Candy** m_tauler;
+    // Eliminem m_storage
 };
 
 #endif

@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/p2_project.dir/src/block.cpp.o"
+  "CMakeFiles/p2_project.dir/src/block.cpp.o.d"
   "CMakeFiles/p2_project.dir/src/board.cpp.o"
   "CMakeFiles/p2_project.dir/src/board.cpp.o.d"
   "CMakeFiles/p2_project.dir/src/candy.cpp.o"

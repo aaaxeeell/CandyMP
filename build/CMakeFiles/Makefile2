@@ -85,12 +85,12 @@ clean: CMakeFiles/p2_project.dir/clean
 CMakeFiles/p2_project.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/p2_project.dir/build.make CMakeFiles/p2_project.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/p2_project.dir/build.make CMakeFiles/p2_project.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/build/CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target p2_project"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/build/CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Built target p2_project"
 .PHONY : CMakeFiles/p2_project.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/p2_project.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/build/CMakeFiles" 19
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/build/CMakeFiles" 20
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/p2_project.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/build/CMakeFiles" 0
 .PHONY : CMakeFiles/p2_project.dir/rule
@@ -102,7 +102,7 @@ p2_project: CMakeFiles/p2_project.dir/rule
 # codegen rule for target.
 CMakeFiles/p2_project.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/p2_project.dir/build.make CMakeFiles/p2_project.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/build/CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Finished codegen for target p2_project"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/build/CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Finished codegen for target p2_project"
 .PHONY : CMakeFiles/p2_project.dir/codegen
 
 # clean rule for target.

@@ -129,6 +129,30 @@ p2_project/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/p2_project.dir/build.make CMakeFiles/p2_project.dir/build
 .PHONY : p2_project/fast
 
+src/block.o: src/block.cpp.o
+.PHONY : src/block.o
+
+# target to build an object file
+src/block.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/p2_project.dir/build.make CMakeFiles/p2_project.dir/src/block.cpp.o
+.PHONY : src/block.cpp.o
+
+src/block.i: src/block.cpp.i
+.PHONY : src/block.i
+
+# target to preprocess a source file
+src/block.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/p2_project.dir/build.make CMakeFiles/p2_project.dir/src/block.cpp.i
+.PHONY : src/block.cpp.i
+
+src/block.s: src/block.cpp.s
+.PHONY : src/block.s
+
+# target to generate assembly for a file
+src/block.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/p2_project.dir/build.make CMakeFiles/p2_project.dir/src/block.cpp.s
+.PHONY : src/block.cpp.s
+
 src/board.o: src/board.cpp.o
 .PHONY : src/board.o
 
@@ -570,6 +594,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... p2_project"
+	@echo "... src/block.o"
+	@echo "... src/block.i"
+	@echo "... src/block.s"
 	@echo "... src/board.o"
 	@echo "... src/board.i"
 	@echo "... src/board.s"

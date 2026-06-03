@@ -4,44 +4,47 @@
 #include <fstream>
 
 Board::Board(int width, int height)
-    : m_width(width), m_height(height),
-    m_tauler(width, std::vector<Candy*>(height, nullptr))
+    : m_width(width), m_height(height)
 {
-    // Inicializamos el almacén de punteros a null
-    for (int i = 0; i < DEFAULT_BOARD_WIDTH; i++)
-        for (int j = 0; j < DEFAULT_BOARD_HEIGHT; j++)
-            m_storage[i][j] = nullptr;
+    m_tauler = new Candy*[m_width * m_height];
+
+    // Inicialitzem tota la matriu a nullptr.
+    for (int i = 0; i < m_width * m_height; i++)
+    {
+        m_tauler[i] = nullptr;
+    }
 }
 
 
 Board::~Board()
 {
-    for (int i = 0; i < DEFAULT_BOARD_WIDTH; i++)
-    {
-        for (int j = 0; j < DEFAULT_BOARD_HEIGHT; j++)
-        {
-            if (m_storage[i][j] != nullptr)
-            {
-                delete m_storage[i][j]; // Borramos la memoria reservada
-            }
-        }
-    }                
+    // Canviem simplement a eliminar el tauler.
+    delete[] m_tauler;            
 }
 
 
 Candy* Board::getCell(int x, int y) const
 {
+    // Idea extreta de internet. Si nosaltres tenim una matriu posada com a concatenació de files
+    // podem utilitzar una formula on y * m_width ens diu a la fila on estem. Al multiplicarla per 
+    // m_width estem dient quantes cel.les ens hem de saltar per arribar a la fila. Un cop estem a 
+    // la fila correcte, ens movem mitjançant + x.
+
     Candy* c = nullptr;
     if (x >= 0 && x < m_width && y >= 0 && y < m_height)
     {
-        c = m_tauler[x][y];
+        c = m_tauler[y * m_width + x];
     }
     return c;
+
 }
 
 void Board::setCell(Candy* candy, int x, int y)
 {
-    m_tauler[x][y] = candy;
+    if (x >= 0 && x < m_width && y >= 0 && y < m_height)
+    {
+        m_tauler[y * m_width + x] = candy;
+    }
 }
 
 int Board::comptarEnDireccio(int x, int y, int dx, int dy, CandyType tipusCaramel) const
@@ -155,12 +158,13 @@ std::vector<Candy*> Board::explodeAndDrop()
                 {
                     // afegim a posicionsAExplotar la posició del tauler que conté 
                     // el caramel a explotar.
-                    if (m_tauler[i][j] != nullptr)
+                    Candy* CaramelAExplotar = getCell(i,j);
+                    if (CaramelAExplotar != nullptr)
                     {
-                        posicionsAExplotar.push_back(m_tauler[i][j]);
+                        posicionsAExplotar.push_back(CaramelAExplotar);
                     }
                     // eliminem la posició.
-                    m_tauler[i][j] = nullptr;
+                    setCell(nullptr, i, j);
                 }
             }
         }
@@ -173,13 +177,13 @@ std::vector<Candy*> Board::explodeAndDrop()
                 int writeY = m_height - 1; // posició més baixa on podem escriure.
                 for (int y = m_height - 1; y >= 0; y--)
                 {
-                    if (m_tauler[x][y] != nullptr)
+                    Candy* CaramelActual = getCell(x,y);
+                    if (CaramelActual != nullptr)
                     {
-                        m_tauler[x][writeY] = m_tauler[x][y];
-
+                        setCell(CaramelActual, x, writeY);
                         if (writeY != y)
                         {
-                            m_tauler[x][y] = nullptr; // buidem on estava abans.
+                            setCell(nullptr, x, y);
                         }
                         writeY--;
                     }
@@ -215,7 +219,7 @@ bool Board::dump(const std::string& output_path) const
                 }
                 else
                 {
-                    fitxer << "6 ";
+                    fitxer << "6 "; // posició buida (si no es cap tipus).
                 }
             }
             fitxer << "\n";
@@ -242,7 +246,11 @@ bool Board::load(const std::string& input_path)
         {
             for (int j = 0; j < m_width; j++)
             {
-                m_tauler[i][j] = nullptr;
+                Candy* caramelVell = getCell(j,i);
+                if (caramelVell != nullptr)
+                    delete caramelVell;
+                
+                setCell(nullptr, j, i);
             }
         }
 
@@ -254,19 +262,18 @@ bool Board::load(const std::string& input_path)
                 fitxer >> tipusCandy;
                 if (tipusCandy >= 0 && tipusCandy < 6)
                 {
-                    // Creamos el objeto REAL en memoria. No es local, así que no desaparece.
-                    m_storage[j][i] = new Candy(static_cast<CandyType>(tipusCandy));
-                    // El tablero apunta a esa dirección de memoria
-                    m_tauler[j][i] = m_storage[j][i];
+                    Candy* nouCaramel = new Candy(static_cast<CandyType>(tipusCandy));
+                    setCell(nouCaramel, j, i);
                 }
                 else
                 {
-                    m_tauler[j][i] = nullptr;
+                    setCell(nullptr, j, i);
                 }
                 
             }
         }
         fitxer.close();
+        fitxerCarregat = true;
     }
-    return true;
+    return fitxerCarregat;
 }

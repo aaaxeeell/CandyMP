@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/src/block.cpp" "CMakeFiles/p2_project.dir/src/block.cpp.o" "gcc" "CMakeFiles/p2_project.dir/src/block.cpp.o.d"
   "/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/src/board.cpp" "CMakeFiles/p2_project.dir/src/board.cpp.o" "gcc" "CMakeFiles/p2_project.dir/src/board.cpp.o.d"
   "/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/src/candy.cpp" "CMakeFiles/p2_project.dir/src/candy.cpp.o" "gcc" "CMakeFiles/p2_project.dir/src/candy.cpp.o.d"
   "/Users/aaaxeeellt/UAB/Programacio 2/CandyMP/drcandy/src/controller.cpp" "CMakeFiles/p2_project.dir/src/controller.cpp.o" "gcc" "CMakeFiles/p2_project.dir/src/controller.cpp.o.d"
