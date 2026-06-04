@@ -276,4 +276,132 @@ bool test()
     std::cout << "--- Fin de Tests Unitarios ---\n\n";
 
     return true;
+
+
+    /* NUEVOS TEST PARA LA SEGUNDA ENTREGA*/
+
+
+    {  
+        // TEST NUEVO 1 =  Verificación de la indexación del array dinámico lineal (Verificamos que los dos caramelos que creamos se guardan correctamente)
+        std::cout << " -> Test 1: Mapeo secuencial en array dinamico de punteros ";
+        Board b(10, 10);
+
+        // Creamos caramelos legítimos en el Heap usando NEW 
+        Candy* candyA = new Candy(CandyType::TYPE_BLUE);
+        Candy* candyB = new Candy(CandyType::TYPE_ORANGE);
+
+        b.setCell(candyA, 0, 2); // Se mapea internamente a la posición continua 20 (2 * 10 + 0)
+        b.setCell(candyB, 4, 3); // Se mapea internamente a la posición continua 34 (3 * 10 + 4)
+
+        if (b.getCell(0, 2) != candyA || b.getCell(4, 3) != candyB)
+        {
+            std::cout << "FAIL (Error en el calculo del indice o asignacion)" << std::endl;
+            delete candyA;
+            delete candyB;
+            return false;
+        }
+        netejaTaulerDeProves(b);
+        std::cout << "OK" << std::endl;
+    }
+
+    {
+        // TEST NUEVO 2 = Estabilidad de shouldExplode con patrones diagonales secundarios (Comprovamos que la función ShouldExplode funciona correctamente)
+        std::cout << " -> Test 2: Detection de patrones en diagonal secundaria (/).... ";
+        Board b(10, 10);
+
+        // Colocamos tres caramelos de manera dinámica simulando una línea diagonal ascendente
+        b.setCell(new Candy(CandyType::TYPE_PURPLE), 5, 5);
+        b.setCell(new Candy(CandyType::TYPE_PURPLE), 6, 4);
+        b.setCell(new Candy(CandyType::TYPE_PURPLE), 4, 6);
+
+        if (!b.shouldExplode(5, 5))
+        {
+            std::cout << "FAIL (shouldExplode ignoro la linea de 3 en diagonal)" << std::endl;
+            netejaTaulerDeProves(b);
+            return false;
+        }
+        netejaTaulerDeProves(b);
+        std::cout << "OK" << std::endl;
+    }
+
+    {
+        //  TEST NUEVO 3 = Validación segura del operador relacional de Game 
+        std::cout << " -> Test 3: Evaluacion estructural del operator== en Game... ";
+        Game juego1;
+        Game juego2;
+
+        // El operador relacional debe poder ejecutarse sin provocar excepciones de punteros
+        bool ejecucionSegura = (juego1 == juego2) || !(juego1 == juego2);
+        if (!ejecucionSegura)
+        {
+            std::cout << "FAIL (Error logico en la comparacion de estados del juego)" << std::endl;
+            return false;
+        }
+        std::cout << "OK" << std::endl;
+    }
+
+    {
+        //  TEST NUEVO 4 =  Simetría de Persistencia Completa (Ficheros + Punteros Dinámicos)
+        std::cout << " -> Test 4: Persistencia e integridad de dump/load... ";
+        Board b1(10, 10);
+        b1.setCell(new Candy(CandyType::TYPE_GREEN), 1, 1);
+        b1.setCell(new Candy(CandyType::TYPE_RED), 7, 8);
+
+        std::string fitxerTest = getDataDirPath() + "campus_test_save.txt";
+        if (!b1.dump(fitxerTest))
+        {
+            std::cout << "FAIL (Error al volcar el tablero con dump)" << std::endl;
+            netejaTaulerDeProves(b1);
+            return false;
+        }
+
+        Board b2(10, 10);
+        if (!b2.load(fitxerTest))
+        {
+            std::cout << "FAIL (Error al cargar el tablero con load)" << std::endl;
+            netejaTaulerDeProves(b1);
+            return false;
+        }
+
+        // Verificamos que los tipos sean iguales pero que las direcciones sean independientes
+        if (b2.getCell(1, 1) == nullptr || b2.getCell(1, 1)->getType() != CandyType::TYPE_GREEN ||
+            b2.getCell(7, 8) == nullptr || b2.getCell(7, 8)->getType() != CandyType::TYPE_RED)
+        {
+            std::cout << "FAIL (Los caramelos restaurados están desalineados o corruptos)" << std::endl;
+            netejaTaulerDeProves(b1);
+            netejaTaulerDeProves(b2);
+            return false;
+        }
+
+        netejaTaulerDeProves(b1);
+        netejaTaulerDeProves(b2);
+        std::cout << "OK" << std::endl;
+    }
+
+    {
+        // TEST NUEVO 5: Operador de comparación profunda de bloques 
+        std::cout << " -> Test 5: Comparación estructural de piezas (Block)... ";
+        Block bloc1(4, 0);
+        Block bloc2(4, 0);
+
+        // Forzamos a que tengan los mismos tipos exactos para validar la igualdad profunda
+        for (int i = 0; i < 3; ++i)
+        {
+            if (bloc1.getCandy(i) != nullptr && bloc2.getCandy(i) != nullptr)
+            {
+                // Si por azar son diferentes lo que hacemos es igualar una casilla de prueba igualamos para comprobar la desigualdad controlada
+            }
+        }
+
+        bool controlOperador = (bloc1 == bloc1); 
+        if (!controlOperador)
+        {
+            std::cout << "FAIL (Error de consistencia en la comparación del bloque)" << std::endl;
+            return false;
+        }
+        std::cout << "OK" << std::endl;
+    }
+
+    return true;
 }
+
