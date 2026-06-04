@@ -5,6 +5,23 @@
 #include <iostream>
 #include <vector>
 
+// Función auxiliar nueva para limpiar el tablero de pruebas sin dejar leaks
+void netejaTaulerDeProves(Board& b)
+{
+    for (int x = 0; x < b.getWidth(); ++x)
+    {
+        for (int y = 0; y < b.getHeight(); ++y)
+        {
+            Candy* actual = b.getCell(x, y);
+            if (actual != nullptr)
+            {
+                delete actual;
+                b.setCell(nullptr, x, y);
+            }
+        }
+    }
+}
+
 bool test()
 {
     { //Test 1, límits
